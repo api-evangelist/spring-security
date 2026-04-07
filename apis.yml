@@ -8,14 +8,14 @@ url: https://spring.io/projects/spring-security
 created: 2024-01-15 00:00:00+00:00
 modified: '2026-03-16'
 tags:
-  - Security
   - Authentication
   - Authorization
   - Java
-  - Spring Framework
+  - JWT
   - OAuth2
   - SAML
-  - JWT
+  - Security
+  - Spring Framework
 apis:
   - name: Spring Security Core API
     description: >-
@@ -38,8 +38,8 @@ apis:
     tags:
       - Authentication
       - Authorization
-      - Security
       - Core
+      - Security
   - name: Spring Security OAuth2
     description: >-
       OAuth 2.0 and OpenID Connect support for Spring Security.
@@ -47,41 +47,35 @@ apis:
     humanURL: https://spring.io/projects/spring-security-oauth
     properties:
       - type: Documentation
-        url: 
-          https://docs.spring.io/spring-security/reference/servlet/oauth2/index.html
+        url: https://docs.spring.io/spring-security/reference/servlet/oauth2/index.html
       - type: OAuth2 Client Documentation
-        url: 
-          https://docs.spring.io/spring-security/reference/servlet/oauth2/client/index.html
+        url: https://docs.spring.io/spring-security/reference/servlet/oauth2/client/index.html
       - type: OAuth2 Resource Server
-        url: 
-          https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/index.html
+        url: https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/index.html
       - type: Authorization Server
         url: https://spring.io/projects/spring-authorization-server
     tags:
-      - OAuth2
-      - OpenID Connect
       - Authorization
       - JWT
+      - OAuth2
+      - OpenID Connect
   - name: Spring Security SAML
     description: >-
       SAML 2.0 Service Provider support.
     baseURL: https://docs.spring.io/spring-security-saml/docs/current/api/
-    humanURL: 
-      https://docs.spring.io/spring-security/reference/servlet/saml2/index.html
+    humanURL: https://docs.spring.io/spring-security/reference/servlet/saml2/index.html
     properties:
       - type: Documentation
-        url: 
-          https://docs.spring.io/spring-security/reference/servlet/saml2/index.html
+        url: https://docs.spring.io/spring-security/reference/servlet/saml2/index.html
       - type: SAML2 Login
-        url: 
-          https://docs.spring.io/spring-security/reference/servlet/saml2/login/index.html
+        url: https://docs.spring.io/spring-security/reference/servlet/saml2/login/index.html
       - type: GitHub Repository
         url: https://github.com/spring-projects/spring-security
     tags:
+      - Enterprise
+      - Federation
       - SAML
       - SSO
-      - Federation
-      - Enterprise
   - name: Spring Security LDAP
     description: >-
       LDAP authentication and authorization support.
@@ -89,15 +83,14 @@ apis:
     humanURL: https://spring.io/projects/spring-security
     properties:
       - type: Documentation
-        url: 
-          https://docs.spring.io/spring-security/reference/servlet/authentication/passwords/ldap.html
+        url: https://docs.spring.io/spring-security/reference/servlet/authentication/passwords/ldap.html
       - type: Guide
         url: https://spring.io/guides/gs/authenticating-ldap/
     tags:
-      - LDAP
-      - Directory Services
       - Authentication
+      - Directory Services
       - Enterprise
+      - LDAP
   - name: Spring Security WebFlux
     description: >-
       Security for reactive Spring WebFlux applications.
@@ -105,19 +98,16 @@ apis:
     humanURL: https://spring.io/projects/spring-security
     properties:
       - type: Documentation
-        url: 
-          https://docs.spring.io/spring-security/reference/reactive/index.html
+        url: https://docs.spring.io/spring-security/reference/reactive/index.html
       - type: Getting Started
-        url: 
-          https://docs.spring.io/spring-security/reference/reactive/getting-started.html
+        url: https://docs.spring.io/spring-security/reference/reactive/getting-started.html
       - type: OAuth2 WebFlux
-        url: 
-          https://docs.spring.io/spring-security/reference/reactive/oauth2/index.html
+        url: https://docs.spring.io/spring-security/reference/reactive/oauth2/index.html
     tags:
+      - Async
+      - Non-Blocking
       - Reactive
       - WebFlux
-      - Non-blocking
-      - Async
 maintainers:
   - name: Spring Security Team
     email: spring-security@vmware.com
@@ -139,8 +129,6 @@ common:
   - type: Issue Tracker
     url: https://github.com/spring-projects/spring-security/issues
   - type: Contributing Guide
-    url: 
-      https://github.com/spring-projects/spring-security/blob/main/CONTRIBUTING.adoc
+    url: https://github.com/spring-projects/spring-security/blob/main/CONTRIBUTING.adoc
   - type: License
-    url: 
-      https://github.com/spring-projects/spring-security/blob/main/LICENSE.txt
+    url: https://github.com/spring-projects/spring-security/blob/main/LICENSE.txt
