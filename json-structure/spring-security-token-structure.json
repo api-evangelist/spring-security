@@ -1,0 +1,46 @@
+{
+  "name": "Spring Security OAuth2 Token Structure",
+  "description": "Structural documentation of OAuth2 token responses, introspection, and OIDC payloads",
+  "version": "6.3.0",
+  "structures": [
+    {
+      "name": "TokenResponse",
+      "description": "OAuth 2.0 token endpoint response",
+      "fields": [
+        { "name": "access_token", "type": "string", "description": "The issued access token (JWT or opaque)", "required": true },
+        { "name": "token_type", "type": "string", "description": "Always 'Bearer'", "required": true },
+        { "name": "expires_in", "type": "integer", "description": "Token lifetime in seconds" },
+        { "name": "refresh_token", "type": "string", "description": "Refresh token for re-issuance" },
+        { "name": "scope", "type": "string", "description": "Granted scopes space-separated" },
+        { "name": "id_token", "type": "string", "description": "JWT ID token (OIDC flows only)" }
+      ]
+    },
+    {
+      "name": "JwtClaims",
+      "description": "Standard JWT claims found in Spring Security issued tokens",
+      "fields": [
+        { "name": "iss", "type": "string", "description": "Issuer URI" },
+        { "name": "sub", "type": "string", "description": "Subject (user/client identifier)" },
+        { "name": "aud", "type": "string|array", "description": "Intended audience" },
+        { "name": "exp", "type": "integer", "description": "Expiration time (Unix epoch)" },
+        { "name": "iat", "type": "integer", "description": "Issued at time (Unix epoch)" },
+        { "name": "jti", "type": "string", "description": "JWT unique identifier" },
+        { "name": "scope", "type": "string", "description": "Granted scopes" },
+        { "name": "authorities", "type": "array", "description": "Spring Security granted authorities" }
+      ]
+    },
+    {
+      "name": "UserInfoClaims",
+      "description": "OpenID Connect UserInfo endpoint claims",
+      "fields": [
+        { "name": "sub", "type": "string", "description": "Subject identifier", "required": true },
+        { "name": "name", "type": "string", "description": "Full name" },
+        { "name": "given_name", "type": "string", "description": "Given/first name" },
+        { "name": "family_name", "type": "string", "description": "Family/last name" },
+        { "name": "email", "type": "string", "description": "Email address" },
+        { "name": "email_verified", "type": "boolean", "description": "Whether email is verified" },
+        { "name": "picture", "type": "string", "description": "Profile picture URL" }
+      ]
+    }
+  ]
+}

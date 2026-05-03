@@ -1,0 +1,26 @@
+{
+  "example": "Issue OAuth2 Token - Client Credentials",
+  "description": "Example of issuing an OAuth2 access token using the client_credentials grant type",
+  "request": {
+    "method": "POST",
+    "url": "http://localhost:9000/oauth2/token",
+    "headers": {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Authorization": "Basic bXktY2xpZW50Om15LXNlY3JldA=="
+    },
+    "body": "grant_type=client_credentials&scope=read+write"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json;charset=UTF-8",
+      "Cache-Control": "no-store"
+    },
+    "body": {
+      "access_token": "eyJraWQiOiJjNzExN2M5Ny1hMzFmLTQwNjEtYTQyNS0zYzg5NzBkMjZmNzYiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJteS1jbGllbnQiLCJhdWQiOiJteS1jbGllbnQiLCJuYmYiOjE3NDYxODYwMDAsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjkwMDAiLCJleHAiOjE3NDYxODk2MDAsImlhdCI6MTc0NjE4NjAwMCwianRpIjoiYWJjMTIzIn0.signature",
+      "token_type": "Bearer",
+      "expires_in": 3600,
+      "scope": "read write"
+    }
+  }
+}

@@ -1,0 +1,65 @@
+extends: spectral:oas
+rules:
+  spring-security-operation-id:
+    description: All operations must have operationId
+    message: "Missing operationId at {{path}}"
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: operationId
+      function: truthy
+
+  spring-security-tags-required:
+    description: All operations must have tags
+    message: "Operation at {{path}} must have tags"
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: tags
+      function: truthy
+
+  spring-security-summary-title-case:
+    description: Summaries must use Title Case
+    message: "Summary '{{value}}' should use Title Case"
+    severity: warn
+    given: "$.paths[*][*].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z]"
+
+  spring-security-oauth2-error-responses:
+    description: OAuth2 token endpoints must define error response schemas
+    message: "Token endpoint should define 400 error response at {{path}}"
+    severity: warn
+    given: "$.paths[/oauth2/token,/oauth2/introspect].post"
+    then:
+      field: "responses.400"
+      function: truthy
+
+  spring-security-security-schemes:
+    description: API should define security schemes
+    message: "API must define securitySchemes in components"
+    severity: error
+    given: "$.components"
+    then:
+      field: securitySchemes
+      function: truthy
+
+  spring-security-bearer-format:
+    description: Bearer auth scheme should specify bearerFormat
+    message: "Bearer security scheme should specify bearerFormat: JWT"
+    severity: info
+    given: "$.components.securitySchemes[*][?(@.scheme == 'bearer')]"
+    then:
+      field: bearerFormat
+      function: truthy
+
+  spring-security-sensitive-endpoints-documented:
+    description: Sensitive OAuth2 endpoints must have descriptions
+    message: "OAuth2 endpoint at {{path}} must have description"
+    severity: error
+    given: "$.paths[/oauth2/token,/oauth2/introspect,/oauth2/revoke,/oauth2/authorize][*]"
+    then:
+      field: description
+      function: truthy

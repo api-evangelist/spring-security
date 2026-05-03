@@ -1,0 +1,58 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "sec": "https://w3id.org/security#",
+    "oauth": "https://www.iana.org/assignments/oauth-parameters/vocab/",
+    "springsec": "https://spring.io/projects/spring-security/vocab/",
+
+    "name": "schema:name",
+    "description": "schema:description",
+    "url": "schema:url",
+
+    "Person": "schema:Person",
+    "email": "schema:email",
+
+    "OAuthToken": {
+      "@id": "oauth:Token",
+      "@type": "@id"
+    },
+    "AccessToken": {
+      "@id": "oauth:AccessToken",
+      "@type": "@id"
+    },
+    "RefreshToken": {
+      "@id": "oauth:RefreshToken",
+      "@type": "@id"
+    },
+    "AuthorizationCode": {
+      "@id": "oauth:AuthorizationCode",
+      "@type": "@id"
+    },
+    "OidcToken": {
+      "@id": "springsec:OidcToken",
+      "@type": "@id"
+    },
+
+    "access_token": { "@id": "oauth:access_token" },
+    "token_type": { "@id": "oauth:token_type" },
+    "expires_in": { "@id": "oauth:expires_in" },
+    "refresh_token": { "@id": "oauth:refresh_token" },
+    "scope": { "@id": "oauth:scope" },
+    "id_token": { "@id": "springsec:id_token" },
+
+    "sub": { "@id": "springsec:subject" },
+    "iss": { "@id": "springsec:issuer" },
+    "aud": { "@id": "springsec:audience" },
+    "exp": { "@id": "springsec:expirationTime" },
+    "iat": { "@id": "springsec:issuedAt" },
+    "jti": { "@id": "springsec:jwtId" },
+
+    "client_id": { "@id": "oauth:client_id" },
+    "redirect_uri": { "@id": "oauth:redirect_uri" },
+    "grant_type": { "@id": "oauth:grant_type" },
+    "response_type": { "@id": "oauth:response_type" },
+    "code_challenge": { "@id": "oauth:code_challenge" },
+    "code_verifier": { "@id": "oauth:code_verifier" }
+  }
+}

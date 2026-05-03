@@ -1,0 +1,175 @@
+name: Spring Security Vocabulary
+description: Domain vocabulary for Spring Security authentication, authorization, OAuth2, OpenID Connect, and SAML concepts
+version: 6.3.0
+created: '2026-05-02'
+modified: '2026-05-02'
+terms:
+  - term: Authentication
+    definition: The process of verifying who a principal is; Spring Security supports username/password, certificates, tokens, and more
+    related:
+      - Authorization
+      - Principal
+      - SecurityContext
+    tags:
+      - Core
+      - Security
+
+  - term: Authorization
+    definition: The process of determining whether an authenticated principal is allowed to perform an action or access a resource
+    related:
+      - Authentication
+      - GrantedAuthority
+      - AccessDecisionManager
+    tags:
+      - Core
+      - Security
+
+  - term: Principal
+    definition: The authenticated user or service account represented in the Spring Security context
+    related:
+      - Authentication
+      - UserDetails
+      - SecurityContext
+    tags:
+      - Core
+      - Identity
+
+  - term: SecurityContext
+    definition: Holder of the Authentication object for the current thread of execution; typically stored in ThreadLocal
+    related:
+      - Authentication
+      - SecurityContextHolder
+    tags:
+      - Core
+      - Context
+
+  - term: OAuth2
+    definition: Authorization framework (RFC 6749/6750) enabling third-party limited access to user accounts on behalf of the user
+    related:
+      - Access Token
+      - Authorization Code
+      - Client Credentials
+      - PKCE
+    tags:
+      - OAuth2
+      - Standard
+
+  - term: Access Token
+    definition: A credential representing the authorization granted to a client; used to access protected resources
+    related:
+      - OAuth2
+      - Bearer Token
+      - JWT
+    tags:
+      - OAuth2
+      - Token
+
+  - term: Refresh Token
+    definition: A long-lived credential used to obtain new access tokens without requiring the user to re-authenticate
+    related:
+      - Access Token
+      - OAuth2
+    tags:
+      - OAuth2
+      - Token
+
+  - term: JWT
+    definition: JSON Web Token — a compact, URL-safe token format used for access tokens and ID tokens in Spring Security
+    related:
+      - Access Token
+      - JWKS
+      - Claims
+    tags:
+      - OAuth2
+      - Token Format
+
+  - term: JWKS
+    definition: JSON Web Key Set — a set of public keys used to verify JWT signatures, exposed at the /oauth2/jwks endpoint
+    related:
+      - JWT
+      - OAuth2
+      - Key Rotation
+    tags:
+      - OAuth2
+      - Cryptography
+
+  - term: OpenID Connect
+    definition: Identity layer on top of OAuth2 enabling client applications to verify user identity and get basic profile info
+    related:
+      - OAuth2
+      - ID Token
+      - UserInfo
+      - OIDC Discovery
+    tags:
+      - OpenID Connect
+      - Identity
+
+  - term: PKCE
+    definition: Proof Key for Code Exchange — extension to OAuth2 Authorization Code flow preventing authorization code interception attacks
+    related:
+      - OAuth2
+      - Authorization Code
+      - Code Verifier
+    tags:
+      - OAuth2
+      - Security
+
+  - term: SAML2
+    definition: Security Assertion Markup Language 2.0 — XML-based protocol for SSO between identity and service providers
+    related:
+      - SSO
+      - Identity Provider
+      - Service Provider
+      - Assertion
+    tags:
+      - SAML
+      - Federation
+
+  - term: CSRF
+    definition: Cross-Site Request Forgery — attack type that Spring Security mitigates via synchronizer tokens or SameSite cookies
+    related:
+      - Security Filter
+      - CsrfToken
+    tags:
+      - Security
+      - Web
+
+  - term: UserDetails
+    definition: Spring Security interface representing a user with username, password, authorities, and account status flags
+    related:
+      - UserDetailsService
+      - Principal
+      - GrantedAuthority
+    tags:
+      - Authentication
+      - Core
+
+  - term: GrantedAuthority
+    definition: Represents a permission or role granted to a principal; used in access control decisions
+    related:
+      - Authorization
+      - UserDetails
+      - Role
+    tags:
+      - Authorization
+      - Core
+
+  - term: Security Filter Chain
+    definition: The ordered chain of servlet filters that constitute Spring Security's request processing pipeline
+    related:
+      - HttpSecurity
+      - Filter
+      - Request Matching
+    tags:
+      - Configuration
+      - Core
+
+  - term: Method Security
+    definition: Spring Security feature enabling authorization via @PreAuthorize, @PostAuthorize, and @Secured annotations on methods
+    related:
+      - Authorization
+      - @PreAuthorize
+      - SpEL
+    tags:
+      - Authorization
+      - AOP

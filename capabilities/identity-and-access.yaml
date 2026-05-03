@@ -1,0 +1,197 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Spring Security - Identity and Access Management"
+  description: >-
+    Workflow capability for Spring Security OAuth2 and OpenID Connect operations.
+    Provides unified identity verification, token management, and access control
+    operations. Used by platform admins, security engineers, and application
+    developers working with Spring Security-backed APIs.
+  tags:
+    - Authentication
+    - Authorization
+    - Identity
+    - JWT
+    - OAuth2
+    - OpenID Connect
+    - Security
+    - Spring
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      SPRING_SECURITY_BASE_URL: SPRING_SECURITY_BASE_URL
+      SPRING_SECURITY_CLIENT_ID: SPRING_SECURITY_CLIENT_ID
+      SPRING_SECURITY_CLIENT_SECRET: SPRING_SECURITY_CLIENT_SECRET
+
+capability:
+  consumes:
+    - import: spring-security-oauth2
+      location: ./shared/spring-security-oauth2.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: identity-and-access-api
+      description: "Unified REST API for Spring Security OAuth2 and OIDC operations."
+      resources:
+        - path: /v1/tokens
+          name: tokens
+          description: "OAuth2 access token management"
+          operations:
+            - method: POST
+              name: issue-access-token
+              description: "Issue an OAuth2 access token using the specified grant type"
+              call: "spring-security-oauth2.issue-token"
+              with:
+                grant_type: "rest.grant_type"
+                code: "rest.code"
+                refresh_token: "rest.refresh_token"
+                scope: "rest.scope"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/tokens/introspect
+          name: token-introspection
+          description: "Token validation and metadata retrieval"
+          operations:
+            - method: POST
+              name: validate-token
+              description: "Validate an OAuth2 token and retrieve its metadata"
+              call: "spring-security-oauth2.introspect-token"
+              with:
+                token: "rest.token"
+                token_type_hint: "rest.token_type_hint"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/tokens/revoke
+          name: token-revocation
+          description: "Token revocation"
+          operations:
+            - method: POST
+              name: revoke-token
+              description: "Revoke an active access or refresh token"
+              call: "spring-security-oauth2.revoke-token"
+              with:
+                token: "rest.token"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/jwks
+          name: signing-keys
+          description: "Public signing key set for JWT verification"
+          operations:
+            - method: GET
+              name: get-signing-keys
+              description: "Retrieve JWKS for JWT signature verification"
+              call: "spring-security-oauth2.get-jwks"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/userinfo
+          name: user-identity
+          description: "Authenticated user identity claims"
+          operations:
+            - method: GET
+              name: get-user-identity
+              description: "Get OIDC claims for the authenticated user"
+              call: "spring-security-oauth2.get-userinfo"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/discovery
+          name: provider-discovery
+          description: "OIDC provider configuration discovery"
+          operations:
+            - method: GET
+              name: get-provider-config
+              description: "Retrieve OpenID Connect provider configuration"
+              call: "spring-security-oauth2.get-oidc-config"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: identity-and-access-mcp
+      transport: http
+      description: "MCP server for AI-assisted identity and access management with Spring Security."
+      tools:
+        - name: issue-access-token
+          description: "Issue an OAuth2 access token using authorization_code, client_credentials, or refresh_token grant"
+          hints:
+            readOnly: false
+            destructive: false
+          call: "spring-security-oauth2.issue-token"
+          with:
+            grant_type: "tools.grant_type"
+            code: "tools.code"
+            refresh_token: "tools.refresh_token"
+            scope: "tools.scope"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: validate-token
+          description: "Validate an OAuth2 access or refresh token and retrieve its claims and status"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "spring-security-oauth2.introspect-token"
+          with:
+            token: "tools.token"
+            token_type_hint: "tools.token_type_hint"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: revoke-token
+          description: "Revoke an OAuth2 token to prevent further use"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "spring-security-oauth2.revoke-token"
+          with:
+            token: "tools.token"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-signing-keys
+          description: "Retrieve the JSON Web Key Set for verifying JWT-format tokens"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "spring-security-oauth2.get-jwks"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-user-claims
+          description: "Retrieve OpenID Connect identity claims for the currently authenticated user"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "spring-security-oauth2.get-userinfo"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: discover-oidc-provider
+          description: "Retrieve OpenID Connect provider metadata for automated client configuration"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "spring-security-oauth2.get-oidc-config"
+          outputParameters:
+            - type: object
+              mapping: "$."
