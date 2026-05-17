@@ -65,9 +65,9 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.spring.io/spring-authorization-server/docs/current/reference/html/
-      - type: GitHub Repository
+      - type: GitHubRepository
         url: https://github.com/spring-projects/spring-authorization-server
-      - type: Getting Started
+      - type: GettingStarted
         url: https://docs.spring.io/spring-authorization-server/docs/current/reference/html/getting-started.html
       - type: OpenAPI
         url: openapi/spring-authorization-server-openapi.yml
@@ -87,13 +87,13 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.spring.io/spring-security/reference/
-      - type: API Reference
+      - type: APIReference
         url: https://docs.spring.io/spring-security/site/docs/current/api/
-      - type: Getting Started
+      - type: GettingStarted
         url: https://spring.io/guides/gs/securing-web/
-      - type: GitHub Repository
+      - type: GitHubRepository
         url: https://github.com/spring-projects/spring-security
-      - type: Release Notes
+      - type: ReleaseNotes
         url: https://github.com/spring-projects/spring-security/releases
       - type: Maven Repository
         url: https://mvnrepository.com/artifact/org.springframework.security
@@ -114,7 +114,7 @@ apis:
         url: https://docs.spring.io/spring-security/reference/servlet/saml2/index.html
       - type: SAML2 Login
         url: https://docs.spring.io/spring-security/reference/servlet/saml2/login/index.html
-      - type: GitHub Repository
+      - type: GitHubRepository
         url: https://github.com/spring-projects/spring-security
   - aid: spring-security:spring-security-ldap
     name: Spring Security LDAP
@@ -148,7 +148,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.spring.io/spring-security/reference/reactive/index.html
-      - type: Getting Started
+      - type: GettingStarted
         url: https://docs.spring.io/spring-security/reference/reactive/getting-started.html
       - type: OAuth2 WebFlux
         url: https://docs.spring.io/spring-security/reference/reactive/oauth2/index.html
@@ -178,5 +178,5 @@ common:
     url: https://github.com/spring-projects/spring-security/blob/main/LICENSE.txt
   - type: Maven Repository
     url: https://mvnrepository.com/artifact/org.springframework.security
-  - type: Changelog
+  - type: ChangeLog
     url: https://github.com/spring-projects/spring-security/releases
