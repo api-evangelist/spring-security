@@ -1,0 +1,146 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Spring Security OAuth2 API — Session
+  description: 'Spring Security OAuth2 API — Session. 3 operations. Lead operation: Get Login Page. Self-contained Naftiko
+    capability covering one Spring Security business surface.'
+  tags:
+  - Spring Security
+  - Session
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SPRING_SECURITY_API_KEY: SPRING_SECURITY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: oauth2-session
+    baseUri: http://localhost:8080
+    description: Spring Security OAuth2 API — Session business capability. Self-contained, no shared references.
+    resources:
+    - name: login
+      path: /login
+      operations:
+      - name: getloginpage
+        method: GET
+        description: Get Login Page
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: processlogin
+        method: POST
+        description: Process Login
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: logout
+      path: /logout
+      operations:
+      - name: logout
+        method: POST
+        description: Spring Security Logout
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: _csrf
+          in: query
+          type: string
+          description: CSRF token
+    authentication:
+      type: bearer
+      token: '{{env.SPRING_SECURITY_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: oauth2-session-rest
+    port: 8080
+    description: REST adapter for Spring Security OAuth2 API — Session. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/login
+      name: login
+      description: REST surface for login.
+      operations:
+      - method: GET
+        name: getloginpage
+        description: Get Login Page
+        call: oauth2-session.getloginpage
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: processlogin
+        description: Process Login
+        call: oauth2-session.processlogin
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/logout
+      name: logout
+      description: REST surface for logout.
+      operations:
+      - method: POST
+        name: logout
+        description: Spring Security Logout
+        call: oauth2-session.logout
+        with:
+          _csrf: rest._csrf
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: oauth2-session-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Spring Security OAuth2 API — Session. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: get-login-page
+      description: Get Login Page
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: oauth2-session.getloginpage
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: process-login
+      description: Process Login
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: oauth2-session.processlogin
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: spring-security-logout
+      description: Spring Security Logout
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: oauth2-session.logout
+      with:
+        _csrf: tools._csrf
+      outputParameters:
+      - type: object
+        mapping: $.

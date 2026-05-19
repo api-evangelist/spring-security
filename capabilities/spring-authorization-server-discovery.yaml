@@ -1,0 +1,102 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Spring Authorization Server API — Discovery
+  description: 'Spring Authorization Server API — Discovery. 2 operations. Lead operation: OAuth2 Server Metadata. Self-contained
+    Naftiko capability covering one Spring Security business surface.'
+  tags:
+  - Spring Security
+  - Discovery
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SPRING_SECURITY_API_KEY: SPRING_SECURITY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: spring-authorization-server-discovery
+    baseUri: http://localhost:9000
+    description: Spring Authorization Server API — Discovery business capability. Self-contained, no shared references.
+    resources:
+    - name: .well-known-oauth-authorization-server
+      path: /.well-known/oauth-authorization-server
+      operations:
+      - name: getoauthmetadata
+        method: GET
+        description: OAuth2 Server Metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: .well-known-openid-configuration
+      path: /.well-known/openid-configuration
+      operations:
+      - name: getoidcdiscovery
+        method: GET
+        description: OpenID Connect Discovery
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.SPRING_SECURITY_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: spring-authorization-server-discovery-rest
+    port: 8080
+    description: REST adapter for Spring Authorization Server API — Discovery. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/well-known/oauth-authorization-server
+      name: well-known-oauth-authorization-server
+      description: REST surface for .well-known-oauth-authorization-server.
+      operations:
+      - method: GET
+        name: getoauthmetadata
+        description: OAuth2 Server Metadata
+        call: spring-authorization-server-discovery.getoauthmetadata
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/well-known/openid-configuration
+      name: well-known-openid-configuration
+      description: REST surface for .well-known-openid-configuration.
+      operations:
+      - method: GET
+        name: getoidcdiscovery
+        description: OpenID Connect Discovery
+        call: spring-authorization-server-discovery.getoidcdiscovery
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: spring-authorization-server-discovery-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Spring Authorization Server API — Discovery. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: oauth2-server-metadata
+      description: OAuth2 Server Metadata
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: spring-authorization-server-discovery.getoauthmetadata
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: openid-connect-discovery
+      description: OpenID Connect Discovery
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: spring-authorization-server-discovery.getoidcdiscovery
+      outputParameters:
+      - type: object
+        mapping: $.

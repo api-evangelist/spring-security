@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Spring Authorization Server API — Client Management
+  description: 'Spring Authorization Server API — Client Management. 1 operations. Lead operation: Dynamic Client Registration.
+    Self-contained Naftiko capability covering one Spring Security business surface.'
+  tags:
+  - Spring Security
+  - Client Management
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SPRING_SECURITY_API_KEY: SPRING_SECURITY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: spring-authorization-server-client-management
+    baseUri: http://localhost:9000
+    description: Spring Authorization Server API — Client Management business capability. Self-contained, no shared references.
+    resources:
+    - name: connect-register
+      path: /connect/register
+      operations:
+      - name: registerclient
+        method: POST
+        description: Dynamic Client Registration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SPRING_SECURITY_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: spring-authorization-server-client-management-rest
+    port: 8080
+    description: REST adapter for Spring Authorization Server API — Client Management. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/connect/register
+      name: connect-register
+      description: REST surface for connect-register.
+      operations:
+      - method: POST
+        name: registerclient
+        description: Dynamic Client Registration
+        call: spring-authorization-server-client-management.registerclient
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: spring-authorization-server-client-management-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Spring Authorization Server API — Client Management. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: dynamic-client-registration
+      description: Dynamic Client Registration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: spring-authorization-server-client-management.registerclient
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

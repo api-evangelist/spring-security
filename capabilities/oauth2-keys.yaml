@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Spring Security OAuth2 API — Keys
+  description: 'Spring Security OAuth2 API — Keys. 1 operations. Lead operation: JSON Web Key Set Endpoint. Self-contained
+    Naftiko capability covering one Spring Security business surface.'
+  tags:
+  - Spring Security
+  - Keys
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SPRING_SECURITY_API_KEY: SPRING_SECURITY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: oauth2-keys
+    baseUri: http://localhost:8080
+    description: Spring Security OAuth2 API — Keys business capability. Self-contained, no shared references.
+    resources:
+    - name: oauth2-jwks
+      path: /oauth2/jwks
+      operations:
+      - name: getjwks
+        method: GET
+        description: JSON Web Key Set Endpoint
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.SPRING_SECURITY_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: oauth2-keys-rest
+    port: 8080
+    description: REST adapter for Spring Security OAuth2 API — Keys. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/oauth2/jwks
+      name: oauth2-jwks
+      description: REST surface for oauth2-jwks.
+      operations:
+      - method: GET
+        name: getjwks
+        description: JSON Web Key Set Endpoint
+        call: oauth2-keys.getjwks
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: oauth2-keys-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Spring Security OAuth2 API — Keys. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: json-web-key-set-endpoint
+      description: JSON Web Key Set Endpoint
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: oauth2-keys.getjwks
+      outputParameters:
+      - type: object
+        mapping: $.

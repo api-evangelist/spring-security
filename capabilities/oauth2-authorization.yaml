@@ -1,0 +1,117 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Spring Security OAuth2 API — Authorization
+  description: 'Spring Security OAuth2 API — Authorization. 1 operations. Lead operation: OAuth2 Authorization Endpoint. Self-contained
+    Naftiko capability covering one Spring Security business surface.'
+  tags:
+  - Spring Security
+  - Authorization
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SPRING_SECURITY_API_KEY: SPRING_SECURITY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: oauth2-authorization
+    baseUri: http://localhost:8080
+    description: Spring Security OAuth2 API — Authorization business capability. Self-contained, no shared references.
+    resources:
+    - name: oauth2-authorize
+      path: /oauth2/authorize
+      operations:
+      - name: authorize
+        method: GET
+        description: OAuth2 Authorization Endpoint
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: response_type
+          in: query
+          type: string
+          description: OAuth 2.0 response type
+          required: true
+        - name: client_id
+          in: query
+          type: string
+          description: Registered client ID
+          required: true
+        - name: redirect_uri
+          in: query
+          type: string
+          description: URI to redirect after authorization
+        - name: scope
+          in: query
+          type: string
+          description: Space-separated list of requested scopes (e.g., openid profile email)
+        - name: state
+          in: query
+          type: string
+          description: CSRF protection state parameter
+        - name: code_challenge
+          in: query
+          type: string
+          description: PKCE code challenge (S256 method recommended)
+        - name: code_challenge_method
+          in: query
+          type: string
+          description: PKCE code challenge method
+    authentication:
+      type: bearer
+      token: '{{env.SPRING_SECURITY_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: oauth2-authorization-rest
+    port: 8080
+    description: REST adapter for Spring Security OAuth2 API — Authorization. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/oauth2/authorize
+      name: oauth2-authorize
+      description: REST surface for oauth2-authorize.
+      operations:
+      - method: GET
+        name: authorize
+        description: OAuth2 Authorization Endpoint
+        call: oauth2-authorization.authorize
+        with:
+          response_type: rest.response_type
+          client_id: rest.client_id
+          redirect_uri: rest.redirect_uri
+          scope: rest.scope
+          state: rest.state
+          code_challenge: rest.code_challenge
+          code_challenge_method: rest.code_challenge_method
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: oauth2-authorization-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Spring Security OAuth2 API — Authorization. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: oauth2-authorization-endpoint
+      description: OAuth2 Authorization Endpoint
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: oauth2-authorization.authorize
+      with:
+        response_type: tools.response_type
+        client_id: tools.client_id
+        redirect_uri: tools.redirect_uri
+        scope: tools.scope
+        state: tools.state
+        code_challenge: tools.code_challenge
+        code_challenge_method: tools.code_challenge_method
+      outputParameters:
+      - type: object
+        mapping: $.

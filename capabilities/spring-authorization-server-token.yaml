@@ -1,0 +1,164 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Spring Authorization Server API — Token
+  description: 'Spring Authorization Server API — Token. 3 operations. Lead operation: Token Introspection. Self-contained
+    Naftiko capability covering one Spring Security business surface.'
+  tags:
+  - Spring Security
+  - Token
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SPRING_SECURITY_API_KEY: SPRING_SECURITY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: spring-authorization-server-token
+    baseUri: http://localhost:9000
+    description: Spring Authorization Server API — Token business capability. Self-contained, no shared references.
+    resources:
+    - name: oauth2-introspect
+      path: /oauth2/introspect
+      operations:
+      - name: tokenintrospection
+        method: POST
+        description: Token Introspection
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: oauth2-revoke
+      path: /oauth2/revoke
+      operations:
+      - name: tokenrevocation
+        method: POST
+        description: Token Revocation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: oauth2-token
+      path: /oauth2/token
+      operations:
+      - name: tokenrequest
+        method: POST
+        description: OAuth2 Token Request
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SPRING_SECURITY_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: spring-authorization-server-token-rest
+    port: 8080
+    description: REST adapter for Spring Authorization Server API — Token. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/oauth2/introspect
+      name: oauth2-introspect
+      description: REST surface for oauth2-introspect.
+      operations:
+      - method: POST
+        name: tokenintrospection
+        description: Token Introspection
+        call: spring-authorization-server-token.tokenintrospection
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/oauth2/revoke
+      name: oauth2-revoke
+      description: REST surface for oauth2-revoke.
+      operations:
+      - method: POST
+        name: tokenrevocation
+        description: Token Revocation
+        call: spring-authorization-server-token.tokenrevocation
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/oauth2/token
+      name: oauth2-token
+      description: REST surface for oauth2-token.
+      operations:
+      - method: POST
+        name: tokenrequest
+        description: OAuth2 Token Request
+        call: spring-authorization-server-token.tokenrequest
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: spring-authorization-server-token-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Spring Authorization Server API — Token. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: token-introspection
+      description: Token Introspection
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: spring-authorization-server-token.tokenintrospection
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: token-revocation
+      description: Token Revocation
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: spring-authorization-server-token.tokenrevocation
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: oauth2-token-request
+      description: OAuth2 Token Request
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: spring-authorization-server-token.tokenrequest
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
