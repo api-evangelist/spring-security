@@ -1,0 +1,20 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/spring-authorization-server-openapi.yml, openapi/spring-security-oauth2-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  sources:
+  - openapi/spring-authorization-server-openapi.yml
+  - openapi/spring-security-oauth2-openapi.yml
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  sources:
+  - openapi/spring-authorization-server-openapi.yml
+  - openapi/spring-security-oauth2-openapi.yml

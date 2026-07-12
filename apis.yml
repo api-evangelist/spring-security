@@ -157,6 +157,12 @@ include:
   - name: Spring Authorization Server
     url: https://spring.io/projects/spring-authorization-server
 common:
+  - type: VulnerabilityDisclosure
+    url: security/spring-security-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/spring-security-domain-security.yml
+  - type: Authentication
+    url: authentication/spring-security-authentication.yml
   - type: Blog
     url: https://spring.io/blog/category/security
   - type: Community
