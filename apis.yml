@@ -157,6 +157,8 @@ include:
   - name: Spring Authorization Server
     url: https://spring.io/projects/spring-authorization-server
 common:
+  - type: AgenticAccess
+    url: agentic-access/spring-security-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/spring-security-vulnerability-disclosure.yml
   - type: DomainSecurity
