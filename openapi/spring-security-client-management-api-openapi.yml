@@ -1,0 +1,93 @@
+openapi: 3.0.3
+info:
+  title: Spring Server Authorization Client Management API
+  description: Spring Authorization Server is a framework providing implementations of OAuth 2.1 and OpenID Connect 1.0 specifications. It exposes standard protocol endpoints for token issuance, token introspection, JWKS publication, device authorization, and OpenID Connect session management.
+  version: 1.3.0
+  contact:
+    name: Spring Security Team
+    url: https://spring.io/projects/spring-authorization-server
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: http://localhost:9000
+  description: Default authorization server port
+tags:
+- name: Client Management
+paths:
+  /connect/register:
+    post:
+      operationId: registerClient
+      summary: Dynamic Client Registration
+      description: Registers a new OAuth2 client dynamically per RFC 7591
+      tags:
+      - Client Management
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientRegistrationRequest'
+      responses:
+        '201':
+          description: Client registered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientRegistrationResponse'
+        '400':
+          description: Invalid registration request
+components:
+  schemas:
+    ClientRegistrationRequest:
+      type: object
+      properties:
+        client_name:
+          type: string
+        redirect_uris:
+          type: array
+          items:
+            type: string
+        grant_types:
+          type: array
+          items:
+            type: string
+        response_types:
+          type: array
+          items:
+            type: string
+        scope:
+          type: string
+        token_endpoint_auth_method:
+          type: string
+        logo_uri:
+          type: string
+    ClientRegistrationResponse:
+      type: object
+      properties:
+        client_id:
+          type: string
+        client_secret:
+          type: string
+        client_name:
+          type: string
+        redirect_uris:
+          type: array
+          items:
+            type: string
+        grant_types:
+          type: array
+          items:
+            type: string
+        registration_access_token:
+          type: string
+        registration_client_uri:
+          type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

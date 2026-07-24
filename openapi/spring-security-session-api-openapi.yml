@@ -1,0 +1,85 @@
+openapi: 3.0.3
+info:
+  title: Spring Server Authorization Session API
+  description: Spring Authorization Server is a framework providing implementations of OAuth 2.1 and OpenID Connect 1.0 specifications. It exposes standard protocol endpoints for token issuance, token introspection, JWKS publication, device authorization, and OpenID Connect session management.
+  version: 1.3.0
+  contact:
+    name: Spring Security Team
+    url: https://spring.io/projects/spring-authorization-server
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: http://localhost:9000
+  description: Default authorization server port
+tags:
+- name: Session
+paths:
+  /logout:
+    post:
+      operationId: logout
+      summary: Spring Security Logout
+      description: Invalidates the current session and clears security context
+      tags:
+      - Session
+      parameters:
+      - name: _csrf
+        in: query
+        required: false
+        schema:
+          type: string
+        description: CSRF token
+      responses:
+        '302':
+          description: Redirect to logout success URL
+  /login:
+    get:
+      operationId: getLoginPage
+      summary: Get Login Page
+      description: Returns the default Spring Security login form
+      tags:
+      - Session
+      responses:
+        '200':
+          description: Login page HTML
+          content:
+            text/html:
+              schema:
+                type: string
+    post:
+      operationId: processLogin
+      summary: Process Login
+      description: Processes username/password login form submission
+      tags:
+      - Session
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - username
+              - password
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+                  format: password
+                _csrf:
+                  type: string
+                remember-me:
+                  type: string
+      responses:
+        '302':
+          description: Redirect on success or failure
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

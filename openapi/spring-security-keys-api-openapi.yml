@@ -1,0 +1,48 @@
+openapi: 3.0.3
+info:
+  title: Spring Server Authorization Keys API
+  description: Spring Authorization Server is a framework providing implementations of OAuth 2.1 and OpenID Connect 1.0 specifications. It exposes standard protocol endpoints for token issuance, token introspection, JWKS publication, device authorization, and OpenID Connect session management.
+  version: 1.3.0
+  contact:
+    name: Spring Security Team
+    url: https://spring.io/projects/spring-authorization-server
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: http://localhost:9000
+  description: Default authorization server port
+tags:
+- name: Keys
+paths:
+  /oauth2/jwks:
+    get:
+      operationId: getJwks
+      summary: JSON Web Key Set
+      description: Returns public signing keys for JWT verification
+      tags:
+      - Keys
+      responses:
+        '200':
+          description: JWKS document
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JwksResponse'
+components:
+  schemas:
+    JwksResponse:
+      type: object
+      properties:
+        keys:
+          type: array
+          items:
+            type: object
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
