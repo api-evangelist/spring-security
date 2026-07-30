@@ -6,6 +6,19 @@ description: >-
   services including authentication, authorization, protection against common exploits (CSRF, session fixation,
   clickjacking), OAuth 2.0, OpenID Connect, SAML 2.0, LDAP, and WebFlux reactive security.
 type: Index
+accessModel:
+  pricing: enterprise
+  onboarding: open
+  trial: false
+  try_now: false
+  public: true
+  label: Enterprise · Open access
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://spring.io/img/projects/spring-security.svg
 url: https://spring.io/projects/spring-security
 created: '2024-01-15'
@@ -22,129 +35,292 @@ tags:
   - Security
   - Spring Framework
 apis:
-  - aid: spring-security:spring-security-oauth2
-    name: Spring Security OAuth2 API
-    description: >-
-      OAuth 2.0 and OpenID Connect support for Spring Security. Provides client registration, authorization code flow,
-      token endpoint, token refresh, PKCE support, and resource server JWT validation.
-    humanURL: https://spring.io/projects/spring-security
-    baseURL: http://localhost:8080
-    tags:
-      - Authorization Server
-      - JWT
-      - OAuth2
-      - OpenID Connect
-      - Token
-    properties:
-      - type: Documentation
-        url: https://docs.spring.io/spring-security/reference/servlet/oauth2/index.html
-      - type: OAuth2 Client Documentation
-        url: https://docs.spring.io/spring-security/reference/servlet/oauth2/client/index.html
-      - type: OAuth2 Resource Server
-        url: https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/index.html
-      - type: Authorization Server
-        url: https://spring.io/projects/spring-authorization-server
-      - type: OpenAPI
-        url: openapi/spring-security-oauth2-openapi.yml
-  - aid: spring-security:spring-authorization-server
-    name: Spring Authorization Server API
-    description: >-
-      Spring's implementation of an OAuth 2.1 and OpenID Connect 1.0 authorization server. Provides issuing access
-      tokens, refresh tokens, and ID tokens with support for PKCE, token introspection, and authorization server
-      metadata.
-    humanURL: https://spring.io/projects/spring-authorization-server
-    baseURL: http://localhost:9000
-    tags:
-      - Authorization Server
-      - OAuth2
-      - OpenID Connect
-      - Token Issuance
-    properties:
-      - type: Documentation
-        url: https://docs.spring.io/spring-authorization-server/docs/current/reference/html/
-      - type: GitHubRepository
-        url: https://github.com/spring-projects/spring-authorization-server
-      - type: GettingStarted
-        url: https://docs.spring.io/spring-authorization-server/docs/current/reference/html/getting-started.html
-      - type: OpenAPI
-        url: openapi/spring-authorization-server-openapi.yml
-  - aid: spring-security:spring-security-core
-    name: Spring Security Core
-    description: >-
-      Core security features for authentication and authorization. Provides UserDetailsService, password encoding,
-      security context management, method security, and HTTP security configuration.
-    humanURL: https://spring.io/projects/spring-security
-    baseURL: https://docs.spring.io/spring-security/site/docs/current/api/
-    tags:
-      - Authentication
-      - Authorization
-      - Core
-      - Method Security
-    properties:
-      - type: Documentation
-        url: https://docs.spring.io/spring-security/reference/
-      - type: APIReference
-        url: https://docs.spring.io/spring-security/site/docs/current/api/
-      - type: GettingStarted
-        url: https://spring.io/guides/gs/securing-web/
-      - type: GitHubRepository
-        url: https://github.com/spring-projects/spring-security
-      - type: ReleaseNotes
-        url: https://github.com/spring-projects/spring-security/releases
-      - type: Maven Repository
-        url: https://mvnrepository.com/artifact/org.springframework.security
-  - aid: spring-security:spring-security-saml
-    name: Spring Security SAML2
-    description: >-
-      SAML 2.0 Service Provider support for Spring Security. Enables SSO integration with SAML identity providers,
-      handling authentication requests, assertions, and SLO (Single Logout).
-    humanURL: https://docs.spring.io/spring-security/reference/servlet/saml2/index.html
-    tags:
-      - Enterprise SSO
-      - Federation
-      - SAML
-      - Single Logout
-    properties:
-      - type: Documentation
-        url: https://docs.spring.io/spring-security/reference/servlet/saml2/index.html
-      - type: SAML2 Login
-        url: https://docs.spring.io/spring-security/reference/servlet/saml2/login/index.html
-      - type: GitHubRepository
-        url: https://github.com/spring-projects/spring-security
-  - aid: spring-security:spring-security-ldap
-    name: Spring Security LDAP
-    description: >-
-      LDAP authentication and authorization support for Spring Security. Supports LDAP bind authentication, password
-      comparison, and user details loading from directory services.
-    humanURL: https://spring.io/projects/spring-security
-    tags:
-      - Authentication
-      - Directory Services
-      - Enterprise
-      - LDAP
-    properties:
-      - type: Documentation
-        url: https://docs.spring.io/spring-security/reference/servlet/authentication/passwords/ldap.html
-      - type: Guide
-        url: https://spring.io/guides/gs/authenticating-ldap/
-  - aid: spring-security:spring-security-webflux
-    name: Spring Security WebFlux
-    description: >-
-      Reactive security for Spring WebFlux applications. Provides non-blocking authentication, authorization, OAuth2
-      reactive client support, and CSRF protection for reactive web stacks.
-    humanURL: https://spring.io/projects/spring-security
-    tags:
-      - Non-Blocking
-      - Reactive
-      - Security
-      - WebFlux
-    properties:
-      - type: Documentation
-        url: https://docs.spring.io/spring-security/reference/reactive/index.html
-      - type: GettingStarted
-        url: https://docs.spring.io/spring-security/reference/reactive/getting-started.html
-      - type: OAuth2 WebFlux
-        url: https://docs.spring.io/spring-security/reference/reactive/oauth2/index.html
+- aid: spring-security:spring-security-core
+  name: Spring Security Core
+  description: >-
+    Core security features for authentication and authorization. Provides UserDetailsService, password
+    encoding, security context management, method security, and HTTP security configuration.
+  humanURL: https://spring.io/projects/spring-security
+  baseURL: https://docs.spring.io/spring-security/site/docs/current/api/
+  tags:
+  - Authentication
+  - Authorization
+  - Core
+  - Method Security
+  properties:
+  - type: Documentation
+    url: https://docs.spring.io/spring-security/reference/
+  - type: APIReference
+    url: https://docs.spring.io/spring-security/site/docs/current/api/
+  - type: GettingStarted
+    url: https://spring.io/guides/gs/securing-web/
+  - type: GitHubRepository
+    url: https://github.com/spring-projects/spring-security
+  - type: ReleaseNotes
+    url: https://github.com/spring-projects/spring-security/releases
+  - type: Maven Repository
+    url: https://mvnrepository.com/artifact/org.springframework.security
+- aid: spring-security:spring-security-saml
+  name: Spring Security SAML2
+  description: >-
+    SAML 2.0 Service Provider support for Spring Security. Enables SSO integration with SAML identity
+    providers, handling authentication requests, assertions, and SLO (Single Logout).
+  humanURL: https://docs.spring.io/spring-security/reference/servlet/saml2/index.html
+  tags:
+  - Enterprise SSO
+  - Federation
+  - SAML
+  - Single Logout
+  properties:
+  - type: Documentation
+    url: https://docs.spring.io/spring-security/reference/servlet/saml2/index.html
+  - type: SAML2 Login
+    url: https://docs.spring.io/spring-security/reference/servlet/saml2/login/index.html
+  - type: GitHubRepository
+    url: https://github.com/spring-projects/spring-security
+- aid: spring-security:spring-security-ldap
+  name: Spring Security LDAP
+  description: >-
+    LDAP authentication and authorization support for Spring Security. Supports LDAP bind authentication,
+    password comparison, and user details loading from directory services.
+  humanURL: https://spring.io/projects/spring-security
+  tags:
+  - Authentication
+  - Directory Services
+  - Enterprise
+  - LDAP
+  properties:
+  - type: Documentation
+    url: >-
+      https://docs.spring.io/spring-security/reference/servlet/authentication/passwords/ldap.html
+  - type: Guide
+    url: https://spring.io/guides/gs/authenticating-ldap/
+- aid: spring-security:spring-security-webflux
+  name: Spring Security WebFlux
+  description: >-
+    Reactive security for Spring WebFlux applications. Provides non-blocking authentication, authorization,
+    OAuth2 reactive client support, and CSRF protection for reactive web stacks.
+  humanURL: https://spring.io/projects/spring-security
+  tags:
+  - Non-Blocking
+  - Reactive
+  - Security
+  - WebFlux
+  properties:
+  - type: Documentation
+    url: https://docs.spring.io/spring-security/reference/reactive/index.html
+  - type: GettingStarted
+    url: https://docs.spring.io/spring-security/reference/reactive/getting-started.html
+  - type: OAuth2 WebFlux
+    url: https://docs.spring.io/spring-security/reference/reactive/oauth2/index.html
+- aid: spring-security:spring-security-authorization-api
+  name: Spring Security Authorization API
+  description: The Authorization API from Spring Security — 1 operation(s) for authorization.
+  humanURL: https://spring.io/projects/spring-security
+  baseURL: http://localhost:8080
+  tags:
+  - Authorization
+  properties:
+  - type: OpenAPI
+    url: openapi/spring-security-authorization-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spring.io/spring-security/reference/servlet/oauth2/index.html
+  - type: OAuth2 Client Documentation
+    url: https://docs.spring.io/spring-security/reference/servlet/oauth2/client/index.html
+  - type: OAuth2 Resource Server
+    url: >-
+      https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/index.html
+  - type: Authorization Server
+    url: https://spring.io/projects/spring-authorization-server
+  - type: Documentation
+    url: https://docs.spring.io/spring-authorization-server/docs/current/reference/html/
+  - type: GitHubRepository
+    url: https://github.com/spring-projects/spring-authorization-server
+  - type: GettingStarted
+    url: >-
+      https://docs.spring.io/spring-authorization-server/docs/current/reference/html/getting-started.html
+- aid: spring-security:spring-security-client-management-api
+  name: Spring Security Client Management API
+  description: The Client Management API from Spring Security — 1 operation(s) for client management.
+  humanURL: https://spring.io/projects/spring-security
+  baseURL: http://localhost:8080
+  tags:
+  - Client Management
+  properties:
+  - type: OpenAPI
+    url: openapi/spring-security-client-management-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spring.io/spring-security/reference/servlet/oauth2/index.html
+  - type: OAuth2 Client Documentation
+    url: https://docs.spring.io/spring-security/reference/servlet/oauth2/client/index.html
+  - type: OAuth2 Resource Server
+    url: >-
+      https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/index.html
+  - type: Authorization Server
+    url: https://spring.io/projects/spring-authorization-server
+  - type: Documentation
+    url: https://docs.spring.io/spring-authorization-server/docs/current/reference/html/
+  - type: GitHubRepository
+    url: https://github.com/spring-projects/spring-authorization-server
+  - type: GettingStarted
+    url: >-
+      https://docs.spring.io/spring-authorization-server/docs/current/reference/html/getting-started.html
+- aid: spring-security:spring-security-device-api
+  name: Spring Security Device API
+  description: The Device API from Spring Security — 1 operation(s) for device.
+  humanURL: https://spring.io/projects/spring-security
+  baseURL: http://localhost:8080
+  tags:
+  - Device
+  properties:
+  - type: OpenAPI
+    url: openapi/spring-security-device-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spring.io/spring-security/reference/servlet/oauth2/index.html
+  - type: OAuth2 Client Documentation
+    url: https://docs.spring.io/spring-security/reference/servlet/oauth2/client/index.html
+  - type: OAuth2 Resource Server
+    url: >-
+      https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/index.html
+  - type: Authorization Server
+    url: https://spring.io/projects/spring-authorization-server
+  - type: Documentation
+    url: https://docs.spring.io/spring-authorization-server/docs/current/reference/html/
+  - type: GitHubRepository
+    url: https://github.com/spring-projects/spring-authorization-server
+  - type: GettingStarted
+    url: >-
+      https://docs.spring.io/spring-authorization-server/docs/current/reference/html/getting-started.html
+- aid: spring-security:spring-security-discovery-api
+  name: Spring Security Discovery API
+  description: The Discovery API from Spring Security — 2 operation(s) for discovery.
+  humanURL: https://spring.io/projects/spring-security
+  baseURL: http://localhost:8080
+  tags:
+  - Discovery
+  properties:
+  - type: OpenAPI
+    url: openapi/spring-security-discovery-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spring.io/spring-security/reference/servlet/oauth2/index.html
+  - type: OAuth2 Client Documentation
+    url: https://docs.spring.io/spring-security/reference/servlet/oauth2/client/index.html
+  - type: OAuth2 Resource Server
+    url: >-
+      https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/index.html
+  - type: Authorization Server
+    url: https://spring.io/projects/spring-authorization-server
+  - type: Documentation
+    url: https://docs.spring.io/spring-authorization-server/docs/current/reference/html/
+  - type: GitHubRepository
+    url: https://github.com/spring-projects/spring-authorization-server
+  - type: GettingStarted
+    url: >-
+      https://docs.spring.io/spring-authorization-server/docs/current/reference/html/getting-started.html
+- aid: spring-security:spring-security-keys-api
+  name: Spring Security Keys API
+  description: The Keys API from Spring Security — 1 operation(s) for keys.
+  humanURL: https://spring.io/projects/spring-security
+  baseURL: http://localhost:8080
+  tags:
+  - Keys
+  properties:
+  - type: OpenAPI
+    url: openapi/spring-security-keys-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spring.io/spring-security/reference/servlet/oauth2/index.html
+  - type: OAuth2 Client Documentation
+    url: https://docs.spring.io/spring-security/reference/servlet/oauth2/client/index.html
+  - type: OAuth2 Resource Server
+    url: >-
+      https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/index.html
+  - type: Authorization Server
+    url: https://spring.io/projects/spring-authorization-server
+  - type: Documentation
+    url: https://docs.spring.io/spring-authorization-server/docs/current/reference/html/
+  - type: GitHubRepository
+    url: https://github.com/spring-projects/spring-authorization-server
+  - type: GettingStarted
+    url: >-
+      https://docs.spring.io/spring-authorization-server/docs/current/reference/html/getting-started.html
+- aid: spring-security:spring-security-openid-connect-api
+  name: Spring Security OpenID Connect API
+  description: The OpenID Connect API from Spring Security — 2 operation(s) for openid connect.
+  humanURL: https://spring.io/projects/spring-security
+  baseURL: http://localhost:8080
+  tags:
+  - OpenID Connect
+  properties:
+  - type: OpenAPI
+    url: openapi/spring-security-openid-connect-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spring.io/spring-security/reference/servlet/oauth2/index.html
+  - type: OAuth2 Client Documentation
+    url: https://docs.spring.io/spring-security/reference/servlet/oauth2/client/index.html
+  - type: OAuth2 Resource Server
+    url: >-
+      https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/index.html
+  - type: Authorization Server
+    url: https://spring.io/projects/spring-authorization-server
+  - type: Documentation
+    url: https://docs.spring.io/spring-authorization-server/docs/current/reference/html/
+  - type: GitHubRepository
+    url: https://github.com/spring-projects/spring-authorization-server
+  - type: GettingStarted
+    url: >-
+      https://docs.spring.io/spring-authorization-server/docs/current/reference/html/getting-started.html
+- aid: spring-security:spring-security-session-api
+  name: Spring Security Session API
+  description: The Session API from Spring Security — 2 operation(s) for session.
+  humanURL: https://spring.io/projects/spring-security
+  baseURL: http://localhost:8080
+  tags:
+  - Session
+  properties:
+  - type: OpenAPI
+    url: openapi/spring-security-session-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spring.io/spring-security/reference/servlet/oauth2/index.html
+  - type: OAuth2 Client Documentation
+    url: https://docs.spring.io/spring-security/reference/servlet/oauth2/client/index.html
+  - type: OAuth2 Resource Server
+    url: >-
+      https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/index.html
+  - type: Authorization Server
+    url: https://spring.io/projects/spring-authorization-server
+  - type: Documentation
+    url: https://docs.spring.io/spring-authorization-server/docs/current/reference/html/
+  - type: GitHubRepository
+    url: https://github.com/spring-projects/spring-authorization-server
+  - type: GettingStarted
+    url: >-
+      https://docs.spring.io/spring-authorization-server/docs/current/reference/html/getting-started.html
+- aid: spring-security:spring-security-token-api
+  name: Spring Security Token API
+  description: The Token API from Spring Security — 3 operation(s) for token.
+  humanURL: https://spring.io/projects/spring-security
+  baseURL: http://localhost:8080
+  tags:
+  - Token
+  properties:
+  - type: OpenAPI
+    url: openapi/spring-security-token-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spring.io/spring-security/reference/servlet/oauth2/index.html
+  - type: OAuth2 Client Documentation
+    url: https://docs.spring.io/spring-security/reference/servlet/oauth2/client/index.html
+  - type: OAuth2 Resource Server
+    url: >-
+      https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/index.html
+  - type: Authorization Server
+    url: https://spring.io/projects/spring-authorization-server
+  - type: Documentation
+    url: https://docs.spring.io/spring-authorization-server/docs/current/reference/html/
+  - type: GitHubRepository
+    url: https://github.com/spring-projects/spring-authorization-server
+  - type: GettingStarted
+    url: >-
+      https://docs.spring.io/spring-authorization-server/docs/current/reference/html/getting-started.html
 maintainers:
   - FN: Spring Security Team
     email: spring-security@vmware.com
