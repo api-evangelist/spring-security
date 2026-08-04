@@ -1,0 +1,28 @@
+{
+  "provider": "spring-security",
+  "sources": [
+    "spring-security-authorization-api-openapi.yml",
+    "spring-security-client-management-api-openapi.yml",
+    "spring-security-device-api-openapi.yml",
+    "spring-security-discovery-api-openapi.yml",
+    "spring-security-keys-api-openapi.yml",
+    "spring-security-openid-connect-api-openapi.yml",
+    "spring-security-session-api-openapi.yml",
+    "spring-security-token-api-openapi.yml"
+  ],
+  "outputs": [
+    "spring-security-authorization-api-openapi.yml",
+    "spring-security-client-management-api-openapi.yml",
+    "spring-security-device-api-openapi.yml",
+    "spring-security-discovery-api-openapi.yml",
+    "spring-security-keys-api-openapi.yml",
+    "spring-security-openid-connect-api-openapi.yml",
+    "spring-security-session-api-openapi.yml",
+    "spring-security-token-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
