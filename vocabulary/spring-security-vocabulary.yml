@@ -168,7 +168,7 @@ terms:
     definition: Spring Security feature enabling authorization via @PreAuthorize, @PostAuthorize, and @Secured annotations on methods
     related:
       - Authorization
-      - @PreAuthorize
+      - "@PreAuthorize"
       - SpEL
     tags:
       - Authorization
