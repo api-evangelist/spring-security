@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Spring Server Authorization Discovery API",
+    "version": "1.3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Discovery",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "OpenID Connect Discovery",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9000/.well-known/openid-configuration"
+          },
+          "docs": "Returns authorization server OIDC metadata"
+        },
+        {
+          "info": {
+            "name": "OAuth2 Server Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9000/.well-known/oauth-authorization-server"
+          },
+          "docs": "Returns RFC 8414 authorization server metadata"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

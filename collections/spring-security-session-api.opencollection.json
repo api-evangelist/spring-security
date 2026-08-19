@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Spring Server Authorization Session API",
+    "version": "1.3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Session",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Spring Security Logout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:9000/logout",
+            "params": [
+              {
+                "name": "_csrf",
+                "value": "",
+                "type": "query",
+                "description": "CSRF token"
+              }
+            ]
+          },
+          "docs": "Invalidates the current session and clears security context"
+        },
+        {
+          "info": {
+            "name": "Get Login Page",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9000/login"
+          },
+          "docs": "Returns the default Spring Security login form"
+        },
+        {
+          "info": {
+            "name": "Process Login",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:9000/login",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "username",
+                  "value": ""
+                },
+                {
+                  "name": "password",
+                  "value": ""
+                },
+                {
+                  "name": "_csrf",
+                  "value": ""
+                },
+                {
+                  "name": "remember-me",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Processes username/password login form submission"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
