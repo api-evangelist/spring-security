@@ -29,6 +29,15 @@ tags:
   - Authorization
   - Java
   - JWT
+  - OpenID Connect
+  - SAML
+  - Security
+  - Spring Framework
+tags_raw:
+  - Authentication
+  - Authorization
+  - Java
+  - JWT
   - OAuth2
   - OpenID Connect
   - SAML
