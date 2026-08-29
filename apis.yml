@@ -6,6 +6,18 @@ description: >-
   services including authentication, authorization, protection against common exploits (CSRF, session fixation,
   clickjacking), OAuth 2.0, OpenID Connect, SAML 2.0, LDAP, and WebFlux reactive security.
 type: Index
+deliveryModel:
+  model: unknown
+  open_source: unknown
+  commercial: false
+  callable_host: false
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  - repository-unlicensed
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: enterprise
   onboarding: open
@@ -342,6 +354,12 @@ include:
   - name: Spring Authorization Server
     url: https://spring.io/projects/spring-authorization-server
 common:
+  - type: IssueTracker
+    url: https://github.com/spring-projects/spring-security/issues
+  - type: CodeOfConduct
+    url: https://github.com/spring-projects/.github/blob/main/CODE_OF_CONDUCT.md
+  - type: ContributionGuide
+    url: https://github.com/spring-projects/spring-security/blob/main/CONTRIBUTING.adoc
   - type: AgenticAccess
     url: agentic-access/spring-security-agentic-access.yml
   - type: VulnerabilityDisclosure
