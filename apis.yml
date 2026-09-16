@@ -45,6 +45,7 @@ tags:
 - SAML
 - Security
 - Spring Framework
+- Identity Federation
 tags_raw:
 - Authentication
 - Authorization
@@ -55,6 +56,7 @@ tags_raw:
 - SAML
 - Security
 - Spring Framework
+- Identity Federation
 apis:
 - aid: spring-security:spring-security-core
   name: Spring Security Core
