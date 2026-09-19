@@ -281,6 +281,8 @@ apis:
   humanURL: https://spring.io/projects/spring-security
   baseURL: http://localhost:8080
   tags:
+  - Sessions
+  tags_raw:
   - Session
   properties:
   - type: OpenAPI
@@ -305,6 +307,8 @@ apis:
   humanURL: https://spring.io/projects/spring-security
   baseURL: http://localhost:8080
   tags:
+  - Tokens
+  tags_raw:
   - Token
   properties:
   - type: OpenAPI
