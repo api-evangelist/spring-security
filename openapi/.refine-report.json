@@ -1,14 +1,8 @@
 {
   "provider": "spring-security",
   "sources": [
-    "spring-security-authorization-api-openapi.yml",
-    "spring-security-client-management-api-openapi.yml",
-    "spring-security-device-api-openapi.yml",
-    "spring-security-discovery-api-openapi.yml",
-    "spring-security-keys-api-openapi.yml",
-    "spring-security-openid-connect-api-openapi.yml",
-    "spring-security-session-api-openapi.yml",
-    "spring-security-token-api-openapi.yml"
+    "_original/spring-authorization-server-openapi.yml",
+    "_original/spring-security-oauth2-openapi.yml"
   ],
   "outputs": [
     "spring-security-authorization-api-openapi.yml",
@@ -17,12 +11,31 @@
     "spring-security-discovery-api-openapi.yml",
     "spring-security-keys-api-openapi.yml",
     "spring-security-openid-connect-api-openapi.yml",
-    "spring-security-session-api-openapi.yml",
-    "spring-security-token-api-openapi.yml"
+    "spring-security-token-api-openapi.yml",
+    "spring-security-session-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "spring-authorization-server-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "spring-security-oauth2-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "tag 'Authorization' spans 2 source specs (spring-authorization-server-openapi.yml, spring-security-oauth2-openapi.yml): per-path servers applied",
+    "tag 'Discovery' spans 2 source specs (spring-authorization-server-openapi.yml, spring-security-oauth2-openapi.yml): per-path servers applied",
+    "tag 'Keys' spans 2 source specs (spring-authorization-server-openapi.yml, spring-security-oauth2-openapi.yml): per-path servers applied",
+    "tag 'OpenID Connect' spans 2 source specs (spring-authorization-server-openapi.yml, spring-security-oauth2-openapi.yml): per-path servers applied",
+    "tag 'Token' spans 2 source specs (spring-authorization-server-openapi.yml, spring-security-oauth2-openapi.yml): per-path servers applied",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "spring-security-authorization-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "spring-security-client-management-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "spring-security-device-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "spring-security-discovery-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "spring-security-keys-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "spring-security-openid-connect-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "spring-security-session-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "spring-security-token-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

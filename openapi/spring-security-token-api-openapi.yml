@@ -1,17 +1,16 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Spring Server Authorization Token API
-  description: Spring Authorization Server is a framework providing implementations of OAuth 2.1 and OpenID Connect 1.0 specifications. It exposes standard protocol endpoints for token issuance, token introspection, JWKS publication, device authorization, and OpenID Connect session management.
-  version: 1.3.0
-  contact:
-    name: Spring Security Team
-    url: https://spring.io/projects/spring-authorization-server
+  title: Spring Security Token API
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
+  version: '1.0'
+  description: 'Operations tagged Token across 2 of this provider''s published API definitions: spring-authorization-server-openapi.yml, spring-security-oauth2-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: http://localhost:9000
   description: Default authorization server port
+- url: http://localhost:8080
+  description: Default application server
 tags:
 - name: Token
 paths:
@@ -69,6 +68,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OAuthError'
+    servers:
+    - url: http://localhost:9000
+      description: Default authorization server port
   /oauth2/introspect:
     post:
       operationId: tokenIntrospection
@@ -98,6 +100,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/IntrospectionResponse'
+    servers:
+    - url: http://localhost:9000
+      description: Default authorization server port
   /oauth2/revoke:
     post:
       operationId: tokenRevocation
@@ -123,8 +128,18 @@ paths:
       responses:
         '200':
           description: Token revoked
+    servers:
+    - url: http://localhost:9000
+      description: Default authorization server port
 components:
   schemas:
+    OAuthError:
+      type: object
+      properties:
+        error:
+          type: string
+        error_description:
+          type: string
     IntrospectionResponse:
       type: object
       properties:
@@ -157,13 +172,66 @@ components:
           type: string
         id_token:
           type: string
-    OAuthError:
+    OAuthError_2:
       type: object
       properties:
         error:
           type: string
+          enum:
+          - invalid_request
+          - invalid_client
+          - invalid_grant
+          - unauthorized_client
+          - unsupported_grant_type
+          - invalid_scope
         error_description:
           type: string
+    IntrospectionResponse_2:
+      type: object
+      required:
+      - active
+      properties:
+        active:
+          type: boolean
+        scope:
+          type: string
+        client_id:
+          type: string
+        username:
+          type: string
+        token_type:
+          type: string
+        exp:
+          type: integer
+        iat:
+          type: integer
+        sub:
+          type: string
+        aud:
+          type: string
+        iss:
+          type: string
+        jti:
+          type: string
+    TokenResponse_2:
+      type: object
+      properties:
+        access_token:
+          type: string
+        token_type:
+          type: string
+          enum:
+          - Bearer
+        expires_in:
+          type: integer
+          description: Token lifetime in seconds
+        refresh_token:
+          type: string
+        scope:
+          type: string
+        id_token:
+          type: string
+          description: JWT ID token (OpenID Connect only)
   securitySchemes:
     basicAuth:
       type: http
@@ -172,3 +240,6 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
+x-refined-from:
+- spring-authorization-server-openapi.yml
+- spring-security-oauth2-openapi.yml

@@ -1,17 +1,16 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Spring Server Authorization Discovery API
-  description: Spring Authorization Server is a framework providing implementations of OAuth 2.1 and OpenID Connect 1.0 specifications. It exposes standard protocol endpoints for token issuance, token introspection, JWKS publication, device authorization, and OpenID Connect session management.
-  version: 1.3.0
-  contact:
-    name: Spring Security Team
-    url: https://spring.io/projects/spring-authorization-server
+  title: Spring Security Discovery API
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
+  version: '1.0'
+  description: 'Operations tagged Discovery across 2 of this provider''s published API definitions: spring-authorization-server-openapi.yml, spring-security-oauth2-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: http://localhost:9000
   description: Default authorization server port
+- url: http://localhost:8080
+  description: Default application server
 tags:
 - name: Discovery
 paths:
@@ -29,6 +28,9 @@ paths:
             application/json:
               schema:
                 type: object
+    servers:
+    - url: http://localhost:9000
+      description: Default authorization server port
   /.well-known/oauth-authorization-server:
     get:
       operationId: getOAuthMetadata
@@ -43,7 +45,71 @@ paths:
             application/json:
               schema:
                 type: object
+    servers:
+    - url: http://localhost:9000
+      description: Default authorization server port
 components:
+  schemas:
+    AuthorizationServerMetadata:
+      type: object
+      properties:
+        issuer:
+          type: string
+        authorization_endpoint:
+          type: string
+        token_endpoint:
+          type: string
+        jwks_uri:
+          type: string
+        introspection_endpoint:
+          type: string
+        revocation_endpoint:
+          type: string
+        grant_types_supported:
+          type: array
+          items:
+            type: string
+        token_endpoint_auth_methods_supported:
+          type: array
+          items:
+            type: string
+    OpenIdConfiguration:
+      type: object
+      properties:
+        issuer:
+          type: string
+        authorization_endpoint:
+          type: string
+        token_endpoint:
+          type: string
+        userinfo_endpoint:
+          type: string
+        jwks_uri:
+          type: string
+        scopes_supported:
+          type: array
+          items:
+            type: string
+        response_types_supported:
+          type: array
+          items:
+            type: string
+        grant_types_supported:
+          type: array
+          items:
+            type: string
+        id_token_signing_alg_values_supported:
+          type: array
+          items:
+            type: string
+        claims_supported:
+          type: array
+          items:
+            type: string
+        code_challenge_methods_supported:
+          type: array
+          items:
+            type: string
   securitySchemes:
     basicAuth:
       type: http
@@ -52,3 +118,6 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
+x-refined-from:
+- spring-authorization-server-openapi.yml
+- spring-security-oauth2-openapi.yml
