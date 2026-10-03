@@ -133,6 +133,13 @@ paths:
       description: Default authorization server port
 components:
   schemas:
+    OAuthError:
+      type: object
+      properties:
+        error:
+          type: string
+        error_description:
+          type: string
     IntrospectionResponse:
       type: object
       properties:
@@ -165,11 +172,18 @@ components:
           type: string
         id_token:
           type: string
-    OAuthError:
+    OAuthError_2:
       type: object
       properties:
         error:
           type: string
+          enum:
+          - invalid_request
+          - invalid_client
+          - invalid_grant
+          - unauthorized_client
+          - unsupported_grant_type
+          - invalid_scope
         error_description:
           type: string
     IntrospectionResponse_2:
@@ -218,20 +232,6 @@ components:
         id_token:
           type: string
           description: JWT ID token (OpenID Connect only)
-    OAuthError_2:
-      type: object
-      properties:
-        error:
-          type: string
-          enum:
-          - invalid_request
-          - invalid_client
-          - invalid_grant
-          - unauthorized_client
-          - unsupported_grant_type
-          - invalid_scope
-        error_description:
-          type: string
   securitySchemes:
     basicAuth:
       type: http
