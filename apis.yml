@@ -344,6 +344,9 @@ include:
 - name: Spring Authorization Server
   url: https://spring.io/projects/spring-authorization-server
 common:
+- type: CapabilityMap
+  url: capabilities/spring-security-capability-edges.yml
+  name: Spring Security Business Capability Map
 - type: Website
   url: https://spring.io
 - type: IssueTracker

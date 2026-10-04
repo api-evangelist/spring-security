@@ -1,0 +1,76 @@
+slug: spring-security
+provider: Spring Security
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 6
+edges:
+- tag: Authorization
+  spec_file: spring-security-authorization-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.8
+  evidence: GET /oauth2/authorize 'OAuth2 Authorization Request' — vendor is an 'authentication and access-control
+    framework' providing 'OAuth 2.0, OpenID Connect, SAML 2.0, LDAP'
+  reason: The vendor's product IS access control; this endpoint implements the OAuth2 authorization code
+    flow, which is the substance of Identity & Access Management (federation, authN/authZ) rather than
+    incidental auth plumbing attached to some other business API.
+- tag: OpenID Connect
+  spec_file: spring-security-openid-connect-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.8
+  evidence: GET /userinfo  getUserInfo  OpenID Connect UserInfo ... GET /connect/logout  oidcLogout  OpenID
+    Connect Session Logout
+  reason: UserInfo and OIDC logout endpoints perform authenticated identity assertion and session termination
+    — identity federation and access management, consistent with the vendor's stated 'authentication and
+    access-control framework'.
+- tag: Token
+  spec_file: spring-security-token-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.8
+  evidence: POST /oauth2/token  tokenRequest  OAuth2 Token Request; POST /oauth2/introspect  tokenIntrospection;
+    POST /oauth2/revoke  tokenRevocation
+  reason: Issuance, introspection and revocation of OAuth2 access tokens is credential/access lifecycle
+    management, squarely Identity & Access Management for this security framework.
+- tag: Session
+  spec_file: spring-security-session-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.78
+  evidence: POST /logout  logout  Spring Security Logout; GET /login  getLoginPage; POST /login  processLogin  Process
+    Login
+  reason: Login and logout operations are user authentication and session lifecycle — the core of Identity
+    & Access Management. Note the tag is Session (login/logout), not a business 'session' concept.
+- tag: Client Management
+  spec_file: spring-security-client-management-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.7
+  evidence: POST /connect/register 'Dynamic Client Registration'; schemas ClientRegistrationRequest, ClientRegistrationResponse
+  reason: Registration and issuance of OAuth2 client credentials by an authorization server — identity
+    and credential administration. Mapped to IAM; a case could also be made for developer credential management
+    (BC-4270.40), hence moderate confidence on the sub-capability.
+- tag: Device
+  spec_file: spring-security-device-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.7
+  evidence: POST /oauth2/device_authorization 'Device Authorization Request'; schema DeviceAuthorizationResponse
+  reason: OAuth 2.0 device authorization grant issued by the authorization server — an authentication/authorization
+    flow, i.e. Identity & Access Management. 'Device' is not asset or IoT management here.
