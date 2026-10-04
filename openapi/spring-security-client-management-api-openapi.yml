@@ -39,6 +39,27 @@ paths:
           description: Invalid registration request
 components:
   schemas:
+    ClientRegistrationResponse:
+      type: object
+      properties:
+        client_id:
+          type: string
+        client_secret:
+          type: string
+        client_name:
+          type: string
+        redirect_uris:
+          type: array
+          items:
+            type: string
+        grant_types:
+          type: array
+          items:
+            type: string
+        registration_access_token:
+          type: string
+        registration_client_uri:
+          type: string
     ClientRegistrationRequest:
       type: object
       properties:
@@ -61,27 +82,6 @@ components:
         token_endpoint_auth_method:
           type: string
         logo_uri:
-          type: string
-    ClientRegistrationResponse:
-      type: object
-      properties:
-        client_id:
-          type: string
-        client_secret:
-          type: string
-        client_name:
-          type: string
-        redirect_uris:
-          type: array
-          items:
-            type: string
-        grant_types:
-          type: array
-          items:
-            type: string
-        registration_access_token:
-          type: string
-        registration_client_uri:
           type: string
   securitySchemes:
     basicAuth:

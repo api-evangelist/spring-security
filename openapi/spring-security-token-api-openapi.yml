@@ -133,12 +133,20 @@ paths:
       description: Default authorization server port
 components:
   schemas:
-    OAuthError:
+    TokenResponse:
       type: object
       properties:
-        error:
+        access_token:
           type: string
-        error_description:
+        token_type:
+          type: string
+        expires_in:
+          type: integer
+        refresh_token:
+          type: string
+        scope:
+          type: string
+        id_token:
           type: string
     IntrospectionResponse:
       type: object
@@ -157,35 +165,32 @@ components:
           type: integer
         sub:
           type: string
-    TokenResponse:
+    OAuthError:
+      type: object
+      properties:
+        error:
+          type: string
+        error_description:
+          type: string
+    TokenResponse_2:
       type: object
       properties:
         access_token:
           type: string
         token_type:
           type: string
+          enum:
+          - Bearer
         expires_in:
           type: integer
+          description: Token lifetime in seconds
         refresh_token:
           type: string
         scope:
           type: string
         id_token:
           type: string
-    OAuthError_2:
-      type: object
-      properties:
-        error:
-          type: string
-          enum:
-          - invalid_request
-          - invalid_client
-          - invalid_grant
-          - unauthorized_client
-          - unsupported_grant_type
-          - invalid_scope
-        error_description:
-          type: string
+          description: JWT ID token (OpenID Connect only)
     IntrospectionResponse_2:
       type: object
       required:
@@ -213,25 +218,20 @@ components:
           type: string
         jti:
           type: string
-    TokenResponse_2:
+    OAuthError_2:
       type: object
       properties:
-        access_token:
-          type: string
-        token_type:
+        error:
           type: string
           enum:
-          - Bearer
-        expires_in:
-          type: integer
-          description: Token lifetime in seconds
-        refresh_token:
+          - invalid_request
+          - invalid_client
+          - invalid_grant
+          - unauthorized_client
+          - unsupported_grant_type
+          - invalid_scope
+        error_description:
           type: string
-        scope:
-          type: string
-        id_token:
-          type: string
-          description: JWT ID token (OpenID Connect only)
   securitySchemes:
     basicAuth:
       type: http
