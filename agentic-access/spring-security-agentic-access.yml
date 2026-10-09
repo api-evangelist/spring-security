@@ -1,19 +1,22 @@
-generated: '2026-07-15'
+generated: '2026-09-23'
 method: generated
-source: openapi/spring-authorization-server-openapi.yml, openapi/spring-security-oauth2-openapi.yml
+source: openapi/spring-security-authorization-api-openapi.yml, openapi/spring-security-client-management-api-openapi.yml,
+  openapi/spring-security-device-api-openapi.yml, openapi/spring-security-discovery-api-openapi.yml,
+  openapi/spring-security-keys-api-openapi.yml, openapi/spring-security-openid-connect-api-openapi.yml,
+  openapi/spring-security-session-api-openapi.yml, openapi/spring-security-token-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
-  operations: 23
+  operations: 15
   by_action_class:
-    connected: 12
-    acting: 11
+    connected: 8
+    acting: 7
   by_consequence:
-    read: 12
-    write: 9
-    safety-critical: 2
-  human_in_the_loop_required: 2
+    read: 8
+    write: 6
+    safety-critical: 1
+  human_in_the_loop_required: 1
 operations:
 - path: /oauth2/authorize
   method: get
@@ -25,80 +28,6 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /oauth2/token
-  method: post
-  operationId: tokenRequest
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /oauth2/introspect
-  method: post
-  operationId: tokenIntrospection
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /oauth2/revoke
-  method: post
-  operationId: tokenRevocation
-  x-agentic-access:
-    action-class: acting
-    consequence: safety-critical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 120
-      exchange: true
-      purpose-required: true
-      proof-of-possession: true
-    escalation:
-      human-in-the-loop: required
-    audit: required
-- path: /oauth2/jwks
-  method: get
-  operationId: getJwks
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /oauth2/device_authorization
-  method: post
-  operationId: deviceAuthorization
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /connect/register
   method: post
   operationId: registerClient
@@ -115,16 +44,22 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /userinfo
-  method: get
-  operationId: getUserInfo
+- path: /oauth2/device_authorization
+  method: post
+  operationId: deviceAuthorization
   x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
     token:
-      max-ttl: 3600
-    audit: none
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
 - path: /.well-known/openid-configuration
   method: get
   operationId: getOidcDiscovery
@@ -145,9 +80,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /connect/logout
+- path: /oauth2/jwks
   method: get
-  operationId: oidcLogout
+  operationId: getJwks
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -155,64 +90,6 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /oauth2/authorize
-  method: get
-  operationId: authorize
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /oauth2/token
-  method: post
-  operationId: issueToken
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /oauth2/introspect
-  method: post
-  operationId: introspectToken
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /oauth2/revoke
-  method: post
-  operationId: revokeToken
-  x-agentic-access:
-    action-class: acting
-    consequence: safety-critical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 120
-      exchange: true
-      purpose-required: true
-      proof-of-possession: true
-    escalation:
-      human-in-the-loop: required
-    audit: required
 - path: /userinfo
   method: get
   operationId: getUserInfo
@@ -227,41 +104,15 @@ operations:
   method: post
   operationId: getUserInfoPost
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /oauth2/jwks
-  method: get
-  operationId: getJwks
-  x-agentic-access:
     action-class: connected
     consequence: read
     subject: optional
     token:
       max-ttl: 3600
     audit: none
-- path: /.well-known/openid-configuration
+- path: /connect/logout
   method: get
-  operationId: getOpenIdConfiguration
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /.well-known/oauth-authorization-server
-  method: get
-  operationId: getAuthorizationServerMetadata
+  operationId: oidcLogout
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -310,4 +161,52 @@ operations:
       triggers:
       - abnormal
       - high-value
+    audit: required
+- path: /oauth2/token
+  method: post
+  operationId: tokenRequest
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /oauth2/introspect
+  method: post
+  operationId: tokenIntrospection
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /oauth2/revoke
+  method: post
+  operationId: tokenRevocation
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
     audit: required
