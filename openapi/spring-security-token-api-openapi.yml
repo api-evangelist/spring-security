@@ -133,6 +133,13 @@ paths:
       description: Default authorization server port
 components:
   schemas:
+    OAuthError:
+      type: object
+      properties:
+        error:
+          type: string
+        error_description:
+          type: string
     TokenResponse:
       type: object
       properties:
@@ -165,11 +172,18 @@ components:
           type: integer
         sub:
           type: string
-    OAuthError:
+    OAuthError_2:
       type: object
       properties:
         error:
           type: string
+          enum:
+          - invalid_request
+          - invalid_client
+          - invalid_grant
+          - unauthorized_client
+          - unsupported_grant_type
+          - invalid_scope
         error_description:
           type: string
     TokenResponse_2:
@@ -217,20 +231,6 @@ components:
         iss:
           type: string
         jti:
-          type: string
-    OAuthError_2:
-      type: object
-      properties:
-        error:
-          type: string
-          enum:
-          - invalid_request
-          - invalid_client
-          - invalid_grant
-          - unauthorized_client
-          - unsupported_grant_type
-          - invalid_scope
-        error_description:
           type: string
   securitySchemes:
     basicAuth:
